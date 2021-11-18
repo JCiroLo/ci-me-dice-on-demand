@@ -40,9 +40,9 @@ jobs:
         if: success()
         env:
           SLACK_BOT_TOKEN: ${{ secrets.SLACK_BOT_TOKEN }}
-        uses: ci-slack/github-action-slack-notify-build@v1
+        uses: voxmedia/github-action-slack-notify-build@v1
         with:
-          channel_id: A02MW7AG1QS
+          channel_id: C02N8SF22QH
           status: SUCCESS
           color: good
 
@@ -50,8 +50,8 @@ jobs:
         if: failure()
         env:
           SLACK_BOT_TOKEN: ${{ secrets.SLACK_BOT_TOKEN }}
-        uses: ci-slack/github-action-slack-notify-build@v1
+        uses: voxmedia/github-action-slack-notify-build@v1
         with:
-          channel_id: A02MW7AG1QS
+          channel_id: C02N8SF22QH
           status: FAILED
           color: danger
