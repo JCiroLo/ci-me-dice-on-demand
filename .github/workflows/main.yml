@@ -1,5 +1,5 @@
 # Name of workflow to be displyed on Github Console
-name: CI/CD Notify on Slack
+name: CI/CD Deployment - Notifying to Slack
 
 # Controls when the workflow will run
 on:
@@ -20,22 +20,22 @@ jobs:
 
     # steps can run commands, setup tasks or run an action
     steps: 
-      - name: checkout repository
+      - name: Checkout repository
         uses: actions/checkout@v2
       - name: Set up Python 3.8
         uses: actions/setup-python@v2
         with:
           python-version: "3.8"
-      - name: installing requirements
+      - name: Install python dependecies
         uses: py-actions/py-dependency-install@v2      
         with:
           path: "./requirements.txt"   
-      - name: unit test
+      - name: Test aplicaction
         run: |
           python3 -m venv venv
           venv/bin/activate
           python3 -m pytest -v tests/test_dice.py
-      - name: Success slack notification
+      - name: Slack notification (Success)
         # Pick up events even if the job is success.
         if: success()
         env:
@@ -46,7 +46,7 @@ jobs:
           status: SUCCESS
           color: good
 
-      - name: Failure slack notification
+      - name: Slack notification (Failed)
         if: failure()
         env:
           SLACK_BOT_TOKEN: ${{ secrets.SLACK_BOT_TOKEN }}
